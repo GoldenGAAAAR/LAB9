@@ -1,5 +1,6 @@
 #include <example.hpp>
+#include "root_certificates.hpp"
 
 int main() {
-  example();
+  generator("https://bmstu.ru");
 }
