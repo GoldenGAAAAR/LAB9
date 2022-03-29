@@ -40,12 +40,13 @@ find_package(OpenSSL REQUIRED)
 hunter_add_package(gumbo)
 find_package(gumbo CONFIG REQUIRED)
 
-hunter_add_package(Boost COMPONENTS system)
-find_package(Boost REQUIRED COMPONENTS system)
+hunter_add_package(Boost COMPONENTS system filesystem program_options)
+find_package(Boost REQUIRED COMPONENTS system filesystem program_options)
 
 add_library(${PROJECT_NAME} STATIC
   # enum your files and delete this comment
-  ${CMAKE_CURRENT_SOURCE_DIR}/sources/example.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/sources/parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/sources/start_options.cpp
 )
 
 add_executable(demo
@@ -61,8 +62,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 target_link_libraries(demo ${PROJECT_NAME})
 target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
-#target_link_libraries(${PROJECT_NAME} ${GUMBO_LIBRARIES})
-#target_link_libraries(${PROJECT_NAME} Boost::Beast)
 target_link_libraries(${PROJECT_NAME} gumbo::gumbo)
 target_link_libraries(${PROJECT_NAME} OpenSSL::SSL)
 
